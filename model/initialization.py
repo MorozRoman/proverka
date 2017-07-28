@@ -1,7 +1,7 @@
 from selenium import webdriver
 import time
-# from core.session import SessionHelper
-# from core.pages import PagesHelper
+from core.session import SessionHelper
+from core.page import PagesHelper
 
 
 # По курсу папка не core, а fixture
@@ -9,17 +9,17 @@ import time
 class Initialization:
 
     def __init__(self):
-        self.wd = webdriver.Chrome('G:\Projects\Proverka\chromedriver.exe')
+        self.wd = webdriver.Chrome('C:\Projects(GitHub)\Testings\proverka\chromedriver.exe')
         self.wd.maximize_window()
         self.wd.implicitly_wait(60)
-        # self.session = SessionHelper(self)
-        # self.pages = PagesHelper(self)
+        self.session = SessionHelper(self)
+        self.pages = PagesHelper(self)
 
 
     def is_valid(self):
         try:
             # Адресс текущей страницы
-            self.wd.current_url()
+            self.wd.current_url
             return True
         except:
             return False

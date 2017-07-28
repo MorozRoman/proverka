@@ -8,15 +8,19 @@ class PagesHelper:
     def add_drivers_license(self, drivers_license):
         wd = self.app.wd
         self.go_to_profile()
-        wd.find_element_by_class_name('tab-profile').click()
-        wd.find_elements_by_xpath('//h2[contains(@class, "add-doc-btn")]/a').click()
-        self.fill_drivers_license_form(drivers_license)
+        wd.switch_to_window(wd.window_handles[1])
+        wd.find_element_by_class_name('mos-layout-icon-dropdown_up').click()
+        wd.find_element_by_link_text("Личные данные").click()
+        wd.switch_to_window(wd.window_handles[2])
+        if not wd.find_element_by_link_text("+ Водительское удостоверение"):
+            wd.find_element_by_link_text("+ Водительское удостоверение").click()
+            self.fill_drivers_license_form(drivers_license)
 
 
     def go_to_profile(self):
         wd = self.app.wd
         # Оптимизация переходов между страницами
-        if not (wd.current_url.endswith('/my/#profile')):
+        if not (wd.current_url.endswith('/#profile')):
             wd.find_element_by_class_name('mos-layout-icon-dropdown_up').click()
             wd.find_element_by_link_text("Профиль").click()
 

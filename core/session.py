@@ -32,11 +32,11 @@ class SessionHelper:
     # Проверка на нахождение в учетке нужного пользователя
     def ensure_login(self, account):
         wd = self.app.wd
-        if self.is_logged_in():
-            if self.is_logged_in_as(account.username):
-                return
-            else:
-                self.logout()
+        # if self.is_logged_in():
+        #     if self.is_logged_in_as(account.username):
+        #         return
+        #     else:
+        #         self.logout()
         self.login(Account(account.username, account.password))
 
 
@@ -44,12 +44,12 @@ class SessionHelper:
     def ensure_logout(self):
         wd = self.app.wd
         wd.find_element_by_class_name('mos-layout-icon-dropdown_up').click()
-        if self.is_logged_in():
-            self.logout()
+        # if self.is_logged_in():
+        self.logout()
 
-    def is_logged_in(self):
-        wd = self.app.wd
-        return len(wd.find_elements_by_class_name("mos-layout-auth-out").click()) > 0
+    # def is_logged_in(self):
+    #     wd = self.app.wd
+    #     return len(wd.find_elements_by_class_name("mos-layout-auth-out").click()) > 0
 
     def is_logged_in_as(self, username):
         wd = self.app.wd
